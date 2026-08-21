@@ -1,10 +1,11 @@
 import React from 'react';
-import { Home, Package, Activity, LineChart, Settings, AlertTriangle } from 'lucide-react';
+import { Home, Package, Activity, LineChart, Settings, AlertTriangle, Sparkles } from 'lucide-react';
 
 export default function Sidebar({ activeTab, setActiveTab }) {
     const navItems = [
         { icon: Home, label: 'Command Center', active: activeTab === 'Command Center' },
         { icon: AlertTriangle, label: 'Live Incidents', active: activeTab === 'Live Incidents' },
+        { icon: Sparkles, label: 'AI Intelligence', active: activeTab === 'AI Intelligence' },
         { icon: Package, label: 'Resources', active: activeTab === 'Resources' },
         { icon: Activity, label: 'Response Operations', active: activeTab === 'Response Operations' },
         { icon: LineChart, label: 'Analytics', active: activeTab === 'Analytics' },

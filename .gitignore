@@ -8,3 +8,9 @@ __pycache__/
 .pytest_cache/
 venv/
 env/
+<<<<<<< HEAD
+ai-service/models/
+=======
+**/models/
+>>>>>>> 27e7b78 (feat(ai): integrate Hugging Face AI pipeline, AI Intelligence dashboard, and consolidated event grouping)
+*.safetensors
