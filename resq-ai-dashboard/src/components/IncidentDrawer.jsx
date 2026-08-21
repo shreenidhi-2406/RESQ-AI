@@ -73,13 +73,6 @@ export default function IncidentDrawer({ incident, onClose }) {
                         </div>
                     </div>
 
-                    <div className="p-4 bg-indigo-50 rounded-xl border border-indigo-100">
-                        <div className="text-xs text-indigo-500 font-semibold uppercase tracking-wider mb-1">AI Priority Score</div>
-                        <div className="flex items-end gap-2">
-                            <span className="text-4xl font-black text-indigo-700 leading-none">{incident.priorityScore}</span>
-                            <span className="text-indigo-400 font-medium mb-1">/ 100</span>
-                        </div>
-                    </div>
 
                     <div>
                         <h4 className="text-sm font-semibold text-slate-800 mb-2">Status</h4>

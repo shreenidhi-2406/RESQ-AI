@@ -1,14 +1,13 @@
 import React from 'react';
-import { Home, Radio, FileText, Package, Activity, LineChart, Settings, AlertTriangle } from 'lucide-react';
+import { Home, Package, Activity, LineChart, Settings, AlertTriangle } from 'lucide-react';
 
-export default function Sidebar() {
+export default function Sidebar({ activeTab, setActiveTab }) {
     const navItems = [
-        { icon: Home, label: 'Command Center', active: true },
-        { icon: AlertTriangle, label: 'Live Incidents' },
-        { icon: Radio, label: 'Incoming Reports' },
-        { icon: Package, label: 'Resources' },
-        { icon: Activity, label: 'Response Operations' },
-        { icon: LineChart, label: 'Analytics' },
+        { icon: Home, label: 'Command Center', active: activeTab === 'Command Center' },
+        { icon: AlertTriangle, label: 'Live Incidents', active: activeTab === 'Live Incidents' },
+        { icon: Package, label: 'Resources', active: activeTab === 'Resources' },
+        { icon: Activity, label: 'Response Operations', active: activeTab === 'Response Operations' },
+        { icon: LineChart, label: 'Analytics', active: activeTab === 'Analytics' },
     ];
 
     return (
@@ -27,9 +26,10 @@ export default function Sidebar() {
                 {navItems.map((item, i) => (
                     <button
                         key={i}
+                        onClick={() => setActiveTab(item.label)}
                         className={`flex items-center gap-3 px-3 py-2.5 rounded-md text-sm font-medium transition-colors ${item.active
-                                ? 'bg-slate-100 text-slate-900'
-                                : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                            ? 'bg-slate-100 text-slate-900'
+                            : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                             }`}
                     >
                         <item.icon size={18} className={item.active ? 'text-slate-900' : 'text-slate-500'} />

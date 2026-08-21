@@ -12,6 +12,19 @@ let latestCache = {
     lastUpdated: null
 };
 
+// 2-Minute cache specifically for the dummy website (Community)
+let communityCache = [];
+let communityLastFetch = 0;
+
+async function throttledCommunityFetch() {
+    const now = Date.now();
+    if (now - communityLastFetch >= 120000 || communityCache.length === 0) {
+        communityCache = await fetchCommunityData();
+        communityLastFetch = Date.now();
+    }
+    return communityCache;
+}
+
 export function startSourceManager() {
     processSources();
     setInterval(processSources, 60000);
@@ -24,7 +37,7 @@ export async function processSources() {
     const [gdacs, sachet, community, news] = await Promise.all([
         wrapFetch(fetchGDACSData, "GDACS", "official", stats),
         wrapFetch(fetchSachetData, "SACHET", "official", stats),
-        wrapFetch(fetchCommunityData, "Community", "citizen", stats),
+        wrapFetch(throttledCommunityFetch, "Community", "citizen", stats),
         wrapFetch(fetchNewsData, "News Array", "news", stats)
     ]);
 

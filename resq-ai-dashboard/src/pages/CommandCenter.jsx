@@ -2,17 +2,14 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import KPICard from '../components/KPICard';
 import IncidentMap from '../components/IncidentMap';
-import PriorityPanel from '../components/PriorityPanel';
-import IncomingReports from '../components/IncomingReports';
 import { SourceSummary, ResourceStatus } from '../components/ResourceStatus';
 import IncidentTable from '../components/IncidentTable';
 import Charts from '../components/Charts';
-import AIResponsePanel from '../components/AIResponsePanel';
 import IncidentDrawer from '../components/IncidentDrawer';
 
 import { getIncidents, getReports, getSources, getStats } from '../services/api';
 import { AlertCircle, Activity, Users, Box, RefreshCw } from 'lucide-react';
-import { mockResources } from '../data/mockData'; // Keeping this for resource capacity as requested
+import { mockResources } from '../data/mockData';
 
 export default function CommandCenter() {
     const [selectedIncident, setSelectedIncident] = useState(null);
@@ -50,7 +47,7 @@ export default function CommandCenter() {
 
     useEffect(() => {
         fetchData();
-        const interval = setInterval(fetchData, 60000); // 60 seconds
+        const interval = setInterval(fetchData, 60000);
         return () => clearInterval(interval);
     }, []);
 
@@ -73,18 +70,18 @@ export default function CommandCenter() {
 
     return (
         <div className="min-h-screen bg-slate-50 flex">
-            {/* Drawer Overlay lives here */}
+            {/* Drawer Overlay */}
             <IncidentDrawer incident={selectedIncident} onClose={closeDrawer} />
 
             <main className="flex-1 p-6 md:p-8 ml-64 overflow-y-auto">
                 <div className="max-w-[1600px] mx-auto">
-                    <Header onRefresh={fetchData} lastFetchTime={lastFetchTime} error={error} />
+                    <Header onRefresh={fetchData} lastFetchTime={lastFetchTime} error={error} title="Live Data" subtitle="Disaster Intelligence" />
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                         <KPICard
-                            label="CRITICAL INCIDENTS"
-                            value={stats.criticalCount || 0}
-                            subtext="Live priority events"
+                            label="ACTIVE INCIDENTS"
+                            value={incidents.length || 0}
+                            subtext="Live events"
                             icon={AlertCircle}
                             colorClass="text-red-500"
                             highlight={true}
@@ -105,43 +102,34 @@ export default function CommandCenter() {
                         />
                         <KPICard
                             label="RESOURCES NEEDED"
-                            value={mockResources.medicalkits.required}
-                            subtext="Across active incidents (Mock)"
+                            value={"0"}
+                            subtext="(Mock) Awaiting deployment Phase"
                             icon={Box}
                             colorClass="text-emerald-500"
                         />
                     </div>
 
                     <div className="grid grid-cols-12 gap-6 mb-6">
-                        <div className="col-span-12 lg:col-span-8 flex flex-col h-[400px]">
+                        <div className="col-span-12 h-[500px]">
                             <IncidentMap incidents={incidents} onIncidentClick={handleIncidentClick} />
-                        </div>
-                        <div className="col-span-12 lg:col-span-4 h-[400px]">
-                            <PriorityPanel incidents={incidents} onIncidentClick={handleIncidentClick} />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-12 gap-6 mb-6">
-                        <div className="col-span-12 lg:col-span-8 h-[400px]">
+                        <div className="col-span-12 h-[400px]">
                             <IncidentTable incidents={incidents} />
-                        </div>
-                        <div className="col-span-12 lg:col-span-4 h-[400px]">
-                            <IncomingReports reports={reports} />
                         </div>
                     </div>
 
                     <div className="grid grid-cols-12 gap-6 pb-12">
-                        <div className="col-span-12 lg:col-span-3">
+                        <div className="col-span-12 lg:col-span-4">
                             <SourceSummary sources={sources} />
                         </div>
-                        <div className="col-span-12 lg:col-span-3">
+                        <div className="col-span-12 lg:col-span-4">
                             <ResourceStatus resources={mockResources} />
                         </div>
-                        <div className="col-span-12 lg:col-span-3">
+                        <div className="col-span-12 lg:col-span-4">
                             <Charts incidents={incidents} />
-                        </div>
-                        <div className="col-span-12 lg:col-span-3">
-                            <AIResponsePanel reportsCount={reports.length} sourcesCount={sources.length} />
                         </div>
                     </div>
                 </div>
