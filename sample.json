@@ -1,0 +1,66 @@
+{
+  "type": "Feature",
+  "bbox": [
+    80.8,
+    10.5,
+    80.8,
+    10.5
+  ],
+  "geometry": {
+    "type": "Point",
+    "coordinates": [
+      80.8,
+      10.5
+    ]
+  },
+  "properties": {
+    "eventtype": "TC",
+    "eventid": 1001238,
+    "episodeid": 12,
+    "eventname": "DITWAH-25",
+    "glide": "TC-2025-000218-LKA",
+    "name": "Tropical Cyclone DITWAH-25",
+    "description": "Tropical Cyclone DITWAH-25",
+    "htmldescription": "Orange Tropical Cyclone DITWAH-25 in Sri Lanka, India from: 27 Nov 2025  to: 29 Nov 2025 .",
+    "icon": "https://www.gdacs.org/images/gdacs_icons/maps/Green/TC.png",
+    "iconoverall": "https://www.gdacs.org/images/gdacs_icons/maps/Orange/TC.png",
+    "url": {
+      "geometry": "https://www.gdacs.org/gdacsapi/api/polygons/getgeometry?eventtype=TC&eventid=1001238&episodeid=12",
+      "report": "https://www.gdacs.org/report.aspx?eventid=1001238&episodeid=12&eventtype=TC",
+      "details": "https://www.gdacs.org/gdacsapi/api/events/geteventdata?eventtype=TC&eventid=1001238"
+    },
+    "alertlevel": "Orange",
+    "alertscore": 2,
+    "episodealertlevel": "Green",
+    "episodealertscore": 1.0,
+    "istemporary": "false",
+    "iscurrent": "false",
+    "country": "Sri Lanka, India",
+    "fromdate": "2025-11-27T00:00:00",
+    "todate": "2025-11-29T18:00:00",
+    "datemodified": "2026-02-11T15:18:59.037",
+    "iso3": "IND",
+    "source": "JTWC",
+    "sourceid": "",
+    "polygonlabel": "Centroid",
+    "Class": "Point_Centroid",
+    "countryonland": "",
+    "affectedcountries": [
+      {
+        "iso2": "LK",
+        "iso3": "LKA",
+        "countryname": "Sri Lanka"
+      },
+      {
+        "iso2": "IN",
+        "iso3": "IND",
+        "countryname": "India"
+      }
+    ],
+    "severitydata": {
+      "severity": 64.8144,
+      "severitytext": "Tropical Depression (maximum wind speed of 65 km/h)",
+      "severityunit": "km/h"
+    }
+  }
+}

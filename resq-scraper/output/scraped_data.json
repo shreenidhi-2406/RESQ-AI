@@ -1,0 +1,34 @@
+[
+  {
+    "source_type": "news",
+    "source_name": "www.gdacs.org",
+    "source_url": "https://www.gdacs.org/",
+    "title": "GDACS - Global Disaster Awareness and Coordination System",
+    "author": "",
+    "published_time": "",
+    "location": null,
+    "content": "Map of disaster alerts in the past 4 days. European Union, 2026. Map produced by EC-JRC.The designations employed and the presentation of material on the map do not imply the expression of any opinion whatsoever on the part of the European Union concerning the legal status of any country, territory or area or of its authorities, or concerning the delimitation of its frontiers or boundaries.\n                    \n                    The blurred events in the list below are the past events before last 4 days. \n                    \n                    For drought alerts, all the events listed in the homepage are ongoing events. In bold: i) new events; ii) events where a significant worsening has been detected (+ 0.5 GDACS score or increase in the Alert Level); iii) events where new information products are available (Global Drought Observatory Report).\n                    \n                    For Forest Fires alerts , the events are all the ongoing events of class Orange or Red plus the Green alerts with burned area exceeding 10k ha and population within 5 km exceeding 10k.",
+    "url": "https://www.gdacs.org/",
+    "disaster_relevant": true,
+    "scraped_at": "2026-08-20T22:48:01.750880",
+    "disaster_type": null,
+    "severity": null,
+    "people_affected": null
+  },
+  {
+    "source_type": "news",
+    "source_name": "www.gdacs.org",
+    "source_url": "https://www.gdacs.org/gdacsregister",
+    "title": "JRC.Critech.GDACS_Authentication",
+    "author": "",
+    "published_time": "",
+    "location": null,
+    "content": "You need to enable JavaScript to run this app.",
+    "url": "https://www.gdacs.org/gdacsregister",
+    "disaster_relevant": false,
+    "scraped_at": "2026-08-20T22:48:03.100748",
+    "disaster_type": null,
+    "severity": null,
+    "people_affected": null
+  }
+]

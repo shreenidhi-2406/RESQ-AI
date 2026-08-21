@@ -1,0 +1,162 @@
+[
+  {
+    "source": "GDACS",
+    "event_id": "1001238",
+    "event_type": "TC",
+    "event_type_name": "Tropical Cyclone",
+    "event_name": "DITWAH-25",
+    "country": "India",
+    "state": "Tamil Nadu",
+    "location": "Sri Lanka, India",
+    "latitude": 10.5,
+    "longitude": 80.8,
+    "alert_level": "Orange",
+    "start_time": "2025-11-27T00:00:00",
+    "last_update": "2026-02-11T15:18:59.037",
+    "event_status": "Past",
+    "population_exposed": null,
+    "population_affected": null,
+    "severity": 64.8144,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        80.8,
+        10.5
+      ]
+    },
+    "gdacs_url": "https://www.gdacs.org/report.aspx?eventid=1001238&episodeid=12&eventtype=TC",
+    "retrieved_at": "2026-08-20T23:36:24.466335",
+    "tamil_nadu_relevant": true,
+    "near_tamil_nadu": false,
+    "change_status": "UNCHANGED EVENT",
+    "escalated": false
+  },
+  {
+    "source": "GDACS",
+    "event_id": "1001232",
+    "event_type": "TC",
+    "event_type_name": "Tropical Cyclone",
+    "event_name": "MONTHA-25",
+    "country": "India",
+    "state": "Tamil Nadu",
+    "location": "India",
+    "latitude": 16.9,
+    "longitude": 81.4,
+    "alert_level": "Orange",
+    "start_time": "2025-10-26T12:00:00",
+    "last_update": "2026-02-11T15:18:59.037",
+    "event_status": "Past",
+    "population_exposed": null,
+    "population_affected": null,
+    "severity": 83.3328,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        81.4,
+        16.9
+      ]
+    },
+    "gdacs_url": "https://www.gdacs.org/report.aspx?eventid=1001232&episodeid=11&eventtype=TC",
+    "retrieved_at": "2026-08-20T23:36:27.210661",
+    "tamil_nadu_relevant": true,
+    "near_tamil_nadu": false,
+    "change_status": "UNCHANGED EVENT",
+    "escalated": false
+  },
+  {
+    "source": "GDACS",
+    "event_id": "1103434",
+    "event_type": "FL",
+    "event_type_name": "Flood",
+    "event_name": "",
+    "country": "India",
+    "state": "Tamil Nadu",
+    "location": "India",
+    "latitude": 31.3678,
+    "longitude": 76.6203,
+    "alert_level": "Orange",
+    "start_time": "2025-08-16T01:00:00",
+    "last_update": "2025-10-09T21:45:03",
+    "event_status": "Past",
+    "population_exposed": null,
+    "population_affected": null,
+    "severity": 0.0,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        76.6203,
+        31.3678
+      ]
+    },
+    "gdacs_url": "https://www.gdacs.org/report.aspx?eventid=1103434&episodeid=26&eventtype=FL",
+    "retrieved_at": "2026-08-20T23:36:29.222524",
+    "tamil_nadu_relevant": true,
+    "near_tamil_nadu": false,
+    "change_status": "UNCHANGED EVENT",
+    "escalated": false
+  },
+  {
+    "source": "GDACS",
+    "event_id": "1001218",
+    "event_type": "TC",
+    "event_type_name": "Tropical Cyclone",
+    "event_name": "ONE-25",
+    "country": "India",
+    "state": "Tamil Nadu",
+    "location": "India",
+    "latitude": 19.5,
+    "longitude": 84.7,
+    "alert_level": "Orange",
+    "start_time": "2025-10-01T06:00:00",
+    "last_update": "2026-02-11T15:18:59.037",
+    "event_status": "Past",
+    "population_exposed": null,
+    "population_affected": null,
+    "severity": 64.8144,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        84.7,
+        19.5
+      ]
+    },
+    "gdacs_url": "https://www.gdacs.org/report.aspx?eventid=1001218&episodeid=6&eventtype=TC",
+    "retrieved_at": "2026-08-20T23:36:33.445510",
+    "tamil_nadu_relevant": true,
+    "near_tamil_nadu": false,
+    "change_status": "UNCHANGED EVENT",
+    "escalated": false
+  },
+  {
+    "source": "GDACS",
+    "event_id": "1500178",
+    "event_type": "EQ",
+    "event_type_name": "Earthquake",
+    "event_name": "",
+    "country": "India",
+    "state": "Tamil Nadu",
+    "location": "India",
+    "latitude": 26.6066,
+    "longitude": 92.1963,
+    "alert_level": "Orange",
+    "start_time": "2025-09-14T11:11:51",
+    "last_update": "2025-09-15T15:02:38",
+    "event_status": "Past",
+    "population_exposed": null,
+    "population_affected": null,
+    "severity": 5.5,
+    "geometry": {
+      "type": "Point",
+      "coordinates": [
+        92.1963,
+        26.6066
+      ]
+    },
+    "gdacs_url": "https://www.gdacs.org/report.aspx?eventid=1500178&episodeid=1660338&eventtype=EQ",
+    "retrieved_at": "2026-08-20T23:36:35.553806",
+    "tamil_nadu_relevant": true,
+    "near_tamil_nadu": false,
+    "change_status": "UNCHANGED EVENT",
+    "escalated": false
+  }
+]
