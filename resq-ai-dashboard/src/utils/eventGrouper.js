@@ -68,6 +68,29 @@ export function jaccardSimilarity(text1, text2) {
     return union === 0 ? 0 : intersection / union;
 }
 
+const GENERIC_SYSTEM_TITLES = new Set([
+    'resq user emergency alert',
+    'resq emergency alert',
+    'user emergency alert',
+    'user emergency',
+    'emergency alert',
+    'user sos alert',
+    'user sos',
+    'no title',
+    'alert',
+    'emergency alert report'
+]);
+
+/**
+ * Checks if a title/type string represents a meaningful disaster type rather than a generic fallback template string.
+ */
+export function isMeaningfulDisasterType(typeStr) {
+    if (!typeStr || typeof typeStr !== 'string') return false;
+    const norm = typeStr.trim().toLowerCase();
+    if (norm.length < 3) return false;
+    return !GENERIC_SYSTEM_TITLES.has(norm);
+}
+
 /**
  * Evaluates 4 similarity signals between 2 incidents.
  */
@@ -96,15 +119,18 @@ export function evaluatePairSimilarity(inc1, inc2) {
         score += 1;
     }
 
-    // 4. Disaster type match
-    const type1 = (inc1.disaster_type || inc1.title || '').toLowerCase();
-    const type2 = (inc2.disaster_type || inc2.title || '').toLowerCase();
-    if (type1 && type2 && (type1.includes(type2) || type2.includes(type1) || type1 === type2)) {
-        score += 1;
+    // 4. Disaster type match (excluding generic fallback titles)
+    const rawType1 = (inc1.disaster_type || inc1.title || '').trim().toLowerCase();
+    const rawType2 = (inc2.disaster_type || inc2.title || '').trim().toLowerCase();
+
+    if (isMeaningfulDisasterType(rawType1) && isMeaningfulDisasterType(rawType2)) {
+        if (rawType1.includes(rawType2) || rawType2.includes(rawType1) || rawType1 === rawType2) {
+            score += 1;
+        }
     }
 
     // Special fallback: if no coords, but strong text similarity + disaster type match
-    if (dist === null && textSim >= 0.45) {
+    if (dist === null && textSim >= 0.45 && isMeaningfulDisasterType(rawType1)) {
         score += 1;
     }
 
@@ -176,7 +202,7 @@ export function groupIncidents(incidents) {
 
         const locName = bestRep.location_name || bestRep.location || 'Location Not Specified';
 
-        const title = bestRep.title && bestRep.title !== 'RESQ User Emergency Alert' && bestRep.title !== 'No Title'
+        const title = bestRep.title && !GENERIC_SYSTEM_TITLES.has(bestRep.title.trim().toLowerCase())
             ? bestRep.title
             : `${humDisplay} — ${locName}`;
 
