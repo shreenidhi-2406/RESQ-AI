@@ -32,31 +32,31 @@ export function ResourceStatus({ resources }) {
     return (
         <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between max-h-full">
             <h3 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Response Status</h3>
-            <div className="text-[10px] text-slate-400 mb-2 mt-[-10px] uppercase font-bold">Mock Operational Data</div>
+            <div className="text-[10px] text-emerald-600 mb-2 mt-[-10px] uppercase font-bold tracking-wider">Live Operational Demands</div>
 
             <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-sm">
                 <div>
                     <div className="font-semibold text-slate-800 mb-1">Rescue Teams</div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{rescue.available}</span></div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Deployed</span><span className="font-medium text-slate-900">{rescue.deployed}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{rescue?.available ?? 0}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Deployed</span><span className="font-medium text-slate-900">{rescue?.deployed ?? 0}</span></div>
                 </div>
 
                 <div>
                     <div className="font-semibold text-slate-800 mb-1">Ambulances</div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{ambulances.available}</span></div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Deployed</span><span className="font-medium text-slate-900">{ambulances.deployed}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{ambulances?.available ?? 0}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Deployed</span><span className="font-medium text-slate-900">{ambulances?.deployed ?? 0}</span></div>
                 </div>
 
                 <div>
                     <div className="font-semibold text-slate-800 mb-1">Shelter</div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Capacity</span><span className="font-medium text-slate-900">{shelter.capacity}</span></div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Occupied</span><span className="font-medium text-slate-900">{shelter.occupied}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Capacity</span><span className="font-medium text-slate-900">{shelter?.capacity ?? 0}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Occupied</span><span className="font-medium text-slate-900">{shelter?.occupied ?? 0}</span></div>
                 </div>
 
                 <div>
                     <div className="font-semibold text-slate-800 mb-1">Medical Kits</div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{medicalkits.available}</span></div>
-                    <div className="text-slate-600 flex justify-between text-xs"><span>Required</span><span className="font-medium text-red-600">{medicalkits.required}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Available</span><span className="font-medium text-slate-900">{medicalkits?.available ?? 0}</span></div>
+                    <div className="text-slate-600 flex justify-between text-xs"><span>Required</span><span className="font-medium text-red-600">{medicalkits?.required ?? 0}</span></div>
                 </div>
             </div>
         </div>

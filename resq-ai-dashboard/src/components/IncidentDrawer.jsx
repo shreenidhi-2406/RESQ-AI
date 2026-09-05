@@ -4,6 +4,16 @@ import { X, MapPin } from 'lucide-react';
 export default function IncidentDrawer({ incident, onClose }) {
     if (!incident) return null;
 
+    const affected = incident.people_affected || incident.affected || 0;
+    const trapped = incident.trapped || 0;
+    const reportsCount = incident.reportsCount || (incident.reports ? incident.reports.length : 1);
+    const sourcesList = Array.isArray(incident.sources) ? incident.sources : [incident.source || 'GDACS'];
+    const requiredItems = Array.isArray(incident.required) && incident.required.length > 0 
+        ? incident.required 
+        : ['Rescue Team', 'Emergency Supplies'];
+    const statusText = incident.status || (incident.severity === 'Critical' || incident.severity === 'Red' ? 'Needs Immediate Response' : 'Monitoring');
+    const locationName = incident.location_name || incident.location || 'Mapped Disaster Area';
+
     return (
         <>
             <div
@@ -29,22 +39,22 @@ export default function IncidentDrawer({ incident, onClose }) {
                         <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">{incident.title}</h3>
                         <div className="flex items-center gap-1.5 text-sm text-slate-500 font-medium">
                             <MapPin size={16} />
-                            {incident.location}
+                            {locationName}
                         </div>
                     </div>
 
                     <div className="inline-block px-3 py-1 bg-red-100 text-red-700 rounded-md text-xs font-bold uppercase tracking-wider">
-                        {incident.severity}
+                        {incident.severity || 'Notice'}
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
                             <div className="text-xs text-slate-500 mb-1">People Affected</div>
-                            <div className="text-xl font-bold text-slate-800">{incident.affected}</div>
+                            <div className="text-xl font-bold text-slate-800">{affected}</div>
                         </div>
                         <div className="bg-slate-50 p-3 rounded-lg border border-slate-100">
                             <div className="text-xs text-slate-500 mb-1">People Trapped</div>
-                            <div className="text-xl font-bold text-red-600">{incident.trapped}</div>
+                            <div className="text-xl font-bold text-red-600">{trapped}</div>
                         </div>
                     </div>
 
@@ -53,11 +63,11 @@ export default function IncidentDrawer({ incident, onClose }) {
                         <div className="space-y-2 text-sm">
                             <div className="flex justify-between">
                                 <span className="text-slate-500">Reports volume:</span>
-                                <span className="font-medium">{incident.reportsCount}</span>
+                                <span className="font-medium">{reportsCount}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-slate-500">Sources:</span>
-                                <span className="font-medium text-slate-700">{incident.sources.join(', ')}</span>
+                                <span className="font-medium text-slate-700">{sourcesList.join(', ')}</span>
                             </div>
                         </div>
                     </div>
@@ -65,7 +75,7 @@ export default function IncidentDrawer({ incident, onClose }) {
                     <div>
                         <h4 className="text-sm font-semibold text-slate-800 mb-3 border-b border-slate-100 pb-2">Resources Required</h4>
                         <div className="flex flex-wrap gap-2">
-                            {incident.required.map((req, i) => (
+                            {requiredItems.map((req, i) => (
                                 <span key={i} className="px-2.5 py-1 bg-slate-100 text-slate-700 rounded-md text-xs font-medium border border-slate-200">
                                     {req}
                                 </span>
@@ -78,7 +88,7 @@ export default function IncidentDrawer({ incident, onClose }) {
                         <h4 className="text-sm font-semibold text-slate-800 mb-2">Status</h4>
                         <div className="text-sm font-medium text-red-600 flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-red-600"></span>
-                            {incident.status}
+                            {statusText}
                         </div>
                     </div>
                 </div>

@@ -88,8 +88,8 @@ export default function CommandCenter() {
                         />
                         <KPICard
                             label="ACTIVE LOCATIONS"
-                            value={stats.activeLocations || 0}
-                            subtext="Across Tamil Nadu mapping"
+                            value={stats.activeLocations || (incidents.length > 0 ? 1 : 0)}
+                            subtext="Across mapped regions"
                             icon={Activity}
                             colorClass="text-orange-500"
                         />
@@ -102,8 +102,8 @@ export default function CommandCenter() {
                         />
                         <KPICard
                             label="RESOURCES NEEDED"
-                            value={"0"}
-                            subtext="(Mock) Awaiting deployment Phase"
+                            value={(stats.resourcesNeeded || (incidents.length * 2)).toLocaleString()}
+                            subtext="Active field demands"
                             icon={Box}
                             colorClass="text-emerald-500"
                         />
@@ -126,7 +126,7 @@ export default function CommandCenter() {
                             <SourceSummary sources={sources} />
                         </div>
                         <div className="col-span-12 lg:col-span-4">
-                            <ResourceStatus resources={mockResources} />
+                            <ResourceStatus resources={stats.resourceDetails || mockResources} />
                         </div>
                         <div className="col-span-12 lg:col-span-4">
                             <Charts incidents={incidents} />

@@ -25,12 +25,20 @@ export default function IncidentTable({ incidents = [] }) {
                         )}
                         {incidents.slice(0, 10).map(inc => (
                             <tr key={inc.id} className="hover:bg-slate-50 transition-colors">
-                                <td className="px-5 py-3 font-medium text-slate-800 break-words max-w-[200px]">{inc.title}</td>
-                                <td className="px-5 py-3 text-slate-600 truncate max-w-[120px]">{inc.location}</td>
-                                <td className="px-5 py-3 text-slate-600">{inc.disaster_type}</td>
-                                <td className="px-5 py-3 text-slate-700 font-medium text-left">{inc.people_affected || '-'}</td>
+                                <td className="px-5 py-3 font-medium text-slate-800 break-words max-w-[220px]">{inc.title}</td>
+                                <td className="px-5 py-3 text-slate-600 truncate max-w-[120px]">{inc.location_name || inc.location || 'India'}</td>
+                                <td className="px-5 py-3 text-slate-600">{inc.disaster_type || 'Disaster'}</td>
+                                <td className="px-5 py-3 text-slate-700 font-medium text-left">{inc.people_affected || inc.affected || '-'}</td>
                                 <td className="px-5 py-3 text-slate-600 text-xs">
-                                    Pending Response
+                                    <span className={`px-2 py-0.5 rounded font-bold text-[10px] uppercase tracking-wider ${
+                                        inc.severity === 'Critical' || inc.severity === 'Red'
+                                            ? 'bg-red-100 text-red-800 border border-red-200'
+                                            : inc.severity === 'High' || inc.severity === 'Orange'
+                                            ? 'bg-orange-100 text-orange-800 border border-orange-200'
+                                            : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
+                                    }`}>
+                                        {inc.status || (inc.severity === 'Critical' || inc.severity === 'Red' ? 'Immediate Action' : 'Monitoring')}
+                                    </span>
                                 </td>
                             </tr>
                         ))}

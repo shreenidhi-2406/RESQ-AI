@@ -1,6 +1,7 @@
 import Parser from 'rss-parser';
 import { newsSources } from '../config/newsSources.js';
-import { tamilNaduLocations, disasterKeywords } from '../config/tamilNaduLocations.js';
+import { tamilNaduLocations } from '../config/tamilNaduLocations.js';
+import { evaluateDisasterRelevance } from '../utils/disasterFilter.js';
 import { normalizeRecord } from './normalizer.js';
 
 export async function fetchNewsData() {
@@ -11,7 +12,6 @@ export async function fetchNewsData() {
     });
 
     const newsData = [];
-
     const activeSources = newsSources.filter(s => s.enabled && s.method === 'rss');
 
     const promises = activeSources.map(async (source) => {
@@ -19,11 +19,10 @@ export async function fetchNewsData() {
             const feed = await parser.parseURL(source.feedUrl);
 
             for (const item of feed.items) {
-                const combinedText = `${item.title || ''} ${item.contentSnippet || item.content || ''}`.toLowerCase();
-                processArticle(item, combinedText, source, newsData);
+                processArticle(item, source, newsData);
             }
         } catch (error) {
-            console.error(`Failed to fetch RSS from ${source.name}: ${error.message}`);
+            console.error(`[NewsParser] Failed to fetch RSS from ${source.name}: ${error.message}`);
         }
     });
 
@@ -31,11 +30,23 @@ export async function fetchNewsData() {
     return newsData;
 }
 
-function processArticle(item, combinedText, source, newsData) {
-    const isDisasterRelevant = disasterKeywords.some(keyword => combinedText.includes(keyword));
-    const isTamilNaduRelevant = tamilNaduLocations.some(loc => combinedText.includes(loc.toLowerCase()));
+function processArticle(item, source, newsData) {
+    const title = item.title || '';
+    const text = item.contentSnippet || item.content || '';
+    const combinedText = `${title} ${text}`.toLowerCase();
 
-    if (!isTamilNaduRelevant) return;
+    // Level 1: Strict Rule-Based Disaster Relevance Filter
+    const relevanceResult = evaluateDisasterRelevance(title, text, source.name);
+    if (!relevanceResult.isRelevant) {
+        console.log(`[NewsFilter] REJECTED: "${title.substring(0, 75)}..." | Reason: ${relevanceResult.reason}`);
+        return;
+    }
+
+    // Check Tamil Nadu location relevance
+    const isTamilNaduRelevant = tamilNaduLocations.some(loc => combinedText.includes(loc.toLowerCase()));
+    if (!isTamilNaduRelevant) {
+        return;
+    }
 
     let foundLocation = "Tamil Nadu";
     for (const loc of tamilNaduLocations) {
@@ -45,16 +56,18 @@ function processArticle(item, combinedText, source, newsData) {
         }
     }
 
+    console.log(`[NewsFilter] ACCEPTED: "${title.substring(0, 75)}..." | Type: ${relevanceResult.disasterType} | Loc: ${foundLocation}`);
+
     newsData.push(normalizeRecord({
         id: `NEWS-${item.guid || item.id || Date.now() + Math.random()}`,
         source: source.name,
         source_type: "news",
         title: item.title,
-        description: item.contentSnippet || item.content,
-        disaster_type: "Unknown",
+        description: text,
+        disaster_type: relevanceResult.disasterType !== 'None' ? relevanceResult.disasterType : "Emergency",
         location: foundLocation,
         published_time: item.pubDate || new Date().toISOString(),
         source_url: item.link,
-        disaster_relevant: isDisasterRelevant
+        disaster_relevant: true
     }));
 }

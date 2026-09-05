@@ -1,6 +1,8 @@
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import { startSourceManager } from './services/sourceManager.js';
+import { initChangeStream } from './services/changeStreamService.js';
 
 import incidentsRouter from './routes/incidents.js';
 import reportsRouter from './routes/reports.js';
@@ -25,4 +27,5 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
     console.log(`RESQ-AI Backend running on http://localhost:${PORT}`);
     startSourceManager();
+    initChangeStream();
 });

@@ -1,13 +1,13 @@
 import { getMongoClient } from '../config/db.js';
 import { normalizeRecord } from './normalizer.js';
-import { reverseGeocode } from './geocoder.js';
-import { broadcastSSE } from './sseManager.js';
 
 let changeStream = null;
 
 export async function initChangeStream() {
     try {
         const client = await getMongoClient();
+        if (!client) return;
+
         const db = client.db('resq_ai');
         const collection = db.collection('incidents');
 
@@ -38,12 +38,7 @@ export async function initChangeStream() {
                 const lat = typeof doc.latitude === 'number' ? doc.latitude : parseFloat(doc.latitude) || null;
                 const lng = typeof doc.longitude === 'number' ? doc.longitude : parseFloat(doc.longitude) || null;
 
-                let locationName = doc.location_name;
-                if (!locationName && lat && lng) {
-                    locationName = await reverseGeocode(lat, lng);
-                }
-
-                const formattedLocation = locationName || (doc.location && !doc.location.startsWith('http')
+                const formattedLocation = doc.location_name || (doc.location && !doc.location.startsWith('http')
                     ? doc.location
                     : (lat && lng ? `Lat: ${lat.toFixed(4)}, Long: ${lng.toFixed(4)}` : "Emergency Location"));
 
@@ -71,8 +66,7 @@ export async function initChangeStream() {
                 // STAGE 2 PRIVACY SANITIZATION: Ensure phone_number is never present
                 delete normalized.phone_number;
 
-                console.log(`[ChangeStream] Broadcasting real-time USER emergency event via SSE: ${normalized.id} (${normalized.location_name})`);
-                broadcastSSE('user-emergency', normalized);
+                console.log(`[ChangeStream] Processed USER emergency event: ${normalized.id}`);
             } catch (err) {
                 console.error("[ChangeStream] Error processing change stream document:", err.message);
             }

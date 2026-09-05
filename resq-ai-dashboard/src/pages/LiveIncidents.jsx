@@ -127,7 +127,7 @@ export default function LiveIncidents() {
                     <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
                         <div>
                             <h1 className="text-2xl font-bold text-slate-900 tracking-tight uppercase">LIVE INCIDENTS</h1>
-                            <p className="text-sm text-slate-500 mt-1">Real-time incidents detected across Tamil Nadu</p>
+                            <p className="text-sm text-slate-500 mt-1">Real-time incidents detected across mapped disaster regions</p>
                         </div>
 
                         <div className="flex items-center gap-6">
